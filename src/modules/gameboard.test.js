@@ -16,3 +16,10 @@ test("receiveAttack function receives attack", () => {
   const ship = { hasSunk: false, hits: 1, length: 3 };
   expect(ship.hits).toBe(1);
 });
+
+test("receiveAttack function records missed attacks", () => {
+  const gameboard = new Gameboard();
+  gameboard.placeShip(0, 0, 3);
+  gameboard.receiveAttack(1, 1);
+  expect(gameboard.missedAttacks).toStrictEqual([[1, 1]]);
+});
