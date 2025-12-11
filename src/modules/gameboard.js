@@ -14,6 +14,7 @@ export default class Gameboard {
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ];
+    this.missedAttacks = [];
   }
 
   placeShip(x, y, length) {
@@ -21,6 +22,15 @@ export default class Gameboard {
     this.grid[x][y] = ship;
     for (let i = 0; i < length; i++) {
       this.grid[x][y++] = ship;
+    }
+  }
+
+  receiveAttack(x, y) {
+    if (this.grid[x][y] !== 0) {
+      const ship = this.grid[x][y];
+      ship.hit();
+    } else {
+      this.missedAttacks.push([x, y]);
     }
   }
 }
