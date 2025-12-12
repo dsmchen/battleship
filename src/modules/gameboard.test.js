@@ -1,20 +1,34 @@
 import Gameboard from "./gameboard.js";
+import Ship from "./ship.js";
+jest.mock("./ship.js");
+
+beforeEach(() => {
+  Ship.mockClear();
+});
+
+test("placeShip function calls Ship class constructor", () => {
+  expect(Ship).not.toHaveBeenCalled();
+  const gameboard = new Gameboard();
+  gameboard.placeShip(0, 0, 3);
+  expect(Ship).toHaveBeenCalledTimes(1);
+});
 
 test("placeShip function places ship", () => {
   const gameboard = new Gameboard();
   gameboard.placeShip(0, 0, 3);
-  const ship = { hasSunk: false, hits: 0, length: 3 };
-  expect(gameboard.grid[0][0]).toEqual(ship);
-  expect(gameboard.grid[0][1]).toEqual(ship);
-  expect(gameboard.grid[0][2]).toEqual(ship);
+  expect(gameboard.grid[0][0]).toBeInstanceOf(Ship);
+  expect(gameboard.grid[0][1]).toBeInstanceOf(Ship);
+  expect(gameboard.grid[0][2]).toBeInstanceOf(Ship);
 });
 
-test("receiveAttack function receives attack", () => {
+test("receiveAttack function calls Ship class hit function", () => {
   const gameboard = new Gameboard();
   gameboard.placeShip(0, 0, 3);
   gameboard.receiveAttack(0, 0);
-  const ship = { hasSunk: false, hits: 1, length: 3 };
-  expect(ship.hits).toBe(1);
+
+  const mockShipInstance = Ship.mock.instances[0];
+  const mockHit = mockShipInstance.hit;
+  expect(mockHit).toHaveBeenCalledTimes(1);
 });
 
 test("receiveAttack function records missed attacks", () => {
