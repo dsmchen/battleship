@@ -37,3 +37,33 @@ test("receiveAttack function records missed attacks", () => {
   gameboard.receiveAttack(1, 1);
   expect(gameboard.missedAttacks).toStrictEqual([[1, 1]]);
 });
+
+test("isAllSunk function toggles hasAllSunk variable to be true", () => {
+  const gameboard = new Gameboard();
+  gameboard.placeShip(0, 0, 3);
+  gameboard.receiveAttack(0, 0);
+  gameboard.receiveAttack(0, 1);
+  gameboard.receiveAttack(0, 2);
+
+  const mockShipInstance = Ship.mock.instances[0];
+  Object.defineProperty(mockShipInstance, "hasSunk", {
+    value: true,
+    writable: false,
+  });
+
+  gameboard.isAllSunk();
+  expect(gameboard.hasAllSunk).toBe(true);
+});
+
+test("isAllSunk function toggles hasAllSunk variable to be false", () => {
+  const gameboard = new Gameboard();
+  gameboard.placeShip(0, 0, 3);
+  const mockShipInstance = Ship.mock.instances[0];
+  Object.defineProperty(mockShipInstance, "hasSunk", {
+    value: false,
+    writable: false,
+  });
+
+  gameboard.isAllSunk();
+  expect(gameboard.hasAllSunk).toBe(false);
+});

@@ -15,6 +15,7 @@ export default class Gameboard {
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ];
     this.missedAttacks = [];
+    this.hasAllSunk = false;
   }
 
   placeShip(x, y, length) {
@@ -32,5 +33,26 @@ export default class Gameboard {
     } else {
       this.missedAttacks.push([x, y]);
     }
+  }
+
+  isAllSunk(arr = this.grid) {
+    let shipInstance = 0;
+    let shipHasSunk = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < arr[i].length; j++) {
+        const el = arr[i][j];
+        if (el instanceof Ship) {
+          shipInstance++;
+          if (el.hasSunk) {
+            shipHasSunk++;
+          } else {
+            this.hasAllSunk = false;
+          }
+        }
+      }
+    }
+
+    if (shipInstance === shipHasSunk) this.hasAllSunk = true;
   }
 }
