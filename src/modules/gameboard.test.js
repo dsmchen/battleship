@@ -41,15 +41,17 @@ test("receiveAttack function records missed attacks", () => {
 test("isAllSunk function toggles hasAllSunk variable to be true", () => {
   const gameboard = new Gameboard();
   gameboard.placeShip(0, 0, 3);
+  gameboard.placeShip(1, 1, 2);
   gameboard.receiveAttack(0, 0);
   gameboard.receiveAttack(0, 1);
   gameboard.receiveAttack(0, 2);
+  gameboard.receiveAttack(1, 1);
+  gameboard.receiveAttack(1, 2);
 
-  const mockShipInstance = Ship.mock.instances[0];
-  Object.defineProperty(mockShipInstance, "hasSunk", {
-    value: true,
-    writable: false,
-  });
+  const a = Ship.mock.instances[0];
+  const b = Ship.mock.instances[1];
+  a.hasSunk = true;
+  b.hasSunk = true;
 
   gameboard.isAllSunk();
   expect(gameboard.hasAllSunk).toBe(true);
@@ -58,11 +60,15 @@ test("isAllSunk function toggles hasAllSunk variable to be true", () => {
 test("isAllSunk function toggles hasAllSunk variable to be false", () => {
   const gameboard = new Gameboard();
   gameboard.placeShip(0, 0, 3);
-  const mockShipInstance = Ship.mock.instances[0];
-  Object.defineProperty(mockShipInstance, "hasSunk", {
-    value: false,
-    writable: false,
-  });
+  gameboard.placeShip(1, 1, 2);
+  gameboard.receiveAttack(0, 0);
+  gameboard.receiveAttack(0, 1);
+  gameboard.receiveAttack(0, 2);
+
+  const a = Ship.mock.instances[0];
+  const b = Ship.mock.instances[1];
+  a.hasSunk = true;
+  b.hasSunk = false;
 
   gameboard.isAllSunk();
   expect(gameboard.hasAllSunk).toBe(false);
