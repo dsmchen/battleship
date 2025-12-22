@@ -30,8 +30,10 @@ export default class Gameboard {
     if (this.grid[x][y] !== 0) {
       const ship = this.grid[x][y];
       ship.hit();
+      return true;
     } else {
       this.missedAttacks.push([x, y]);
+      return false;
     }
   }
 

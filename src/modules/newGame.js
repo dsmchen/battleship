@@ -17,6 +17,6 @@ export default function newGame() {
   playerTwo.gameboard.placeShip(3, 3, 4);
   playerTwo.gameboard.placeShip(4, 4, 5);
 
-  renderGameboard(playerOne);
-  renderGameboard(playerTwo);
+  renderGameboard(playerOne, playerTwo);
+  renderGameboard(playerTwo, playerOne);
 }

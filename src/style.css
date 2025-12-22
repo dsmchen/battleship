@@ -92,10 +92,12 @@ h6 {
 /* Battleship */
 
 :root {
+  --red-400: #ef5350;
   --blue-400: #42a5f5;
   --gray-100: #f5f5f5;
   --gray-400: #bdbdbd;
   --gray-900: #212121;
+  --white: #fff;
 }
 
 body {
@@ -137,4 +139,12 @@ body {
 
 .sea {
   background: var(--blue-400);
+}
+
+.sea.hit {
+  background: var(--red-400);
+}
+
+.sea.miss {
+  background: var(--white);
 }
