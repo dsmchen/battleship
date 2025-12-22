@@ -116,7 +116,8 @@ body {
   padding: 40px;
 }
 
-.gameboard-container {
+.ship-container,
+.attack-container {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   width: 402px;
