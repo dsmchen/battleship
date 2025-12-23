@@ -101,14 +101,34 @@ function handleAttack(t, enemy) {
 
 function nextTurn(t, enemy) {
   const thisAttackGrid = t.parentElement;
+  let enemyAttackGrid;
+
   thisAttackGrid.classList.add("block");
 
   for (const grid of document.querySelectorAll(".attack-grid")) {
     if (grid !== thisAttackGrid) {
-      const enemyAttackGrid = grid;
+      enemyAttackGrid = grid;
       enemyAttackGrid.classList.remove("block");
     }
   }
 
   renderMessage("turn", `${enemy.name}'s turn...`);
+
+  if (enemy.name === "Computer") {
+    computerTurn(enemyAttackGrid);
+  }
+}
+
+function computerTurn(attackGrid) {
+  const x = Math.floor(Math.random() * 10);
+  const y = Math.floor(Math.random() * 10);
+  const target = attackGrid.querySelector(`[data-x='${x}'][data-y='${y}']`);
+
+  if (target.classList.contains("hit") || target.classList.contains("miss")) {
+    computerTurn(attackGrid);
+  } else {
+    setTimeout(() => {
+      target.click();
+    }, 3000);
+  }
 }

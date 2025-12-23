@@ -3,8 +3,8 @@ import renderGameboard from "./ui/renderGameboard.js";
 import renderMessage from "./ui/renderMessage.js";
 
 export default function newGame() {
-  const playerOne = new Player("Player 1");
-  const playerTwo = new Player("Player 2");
+  const playerOne = new Player("Human");
+  const playerTwo = new Player("Computer");
 
   playerOne.gameboard.placeShip(0, 0, 5);
   playerOne.gameboard.placeShip(1, 1, 4);
