@@ -153,6 +153,7 @@ body {
   background: var(--blue-400);
 }
 
+.ship.hit,
 .sea.hit {
   background: var(--red-400);
 }

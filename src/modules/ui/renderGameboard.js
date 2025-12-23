@@ -30,10 +30,14 @@ export default function renderGameboard(player, enemy) {
       if (el instanceof Ship) {
         const ship = document.createElement("div");
         ship.classList.add("ship");
+        ship.dataset.x = i;
+        ship.dataset.y = j;
         shipGrid.appendChild(ship);
       } else {
         const sea = document.createElement("div");
         sea.classList.add("sea");
+        sea.dataset.x = i;
+        sea.dataset.y = j;
         shipGrid.appendChild(sea);
       }
     }
@@ -70,12 +74,26 @@ function handleAttack(t, enemy) {
 
   const x = t.dataset.x;
   const y = t.dataset.y;
+  let target;
   const isSuccess = enemy.gameboard.receiveAttack(x, y);
+
+  for (const container of document.querySelectorAll(".ship-container")) {
+    const thisShipContainer = t.parentElement.parentElement.previousSibling;
+
+    if (container !== thisShipContainer) {
+      const enemyShipContainer = container;
+      target = enemyShipContainer.querySelector(
+        `[data-x='${x}'][data-y='${y}']`,
+      );
+    }
+  }
 
   if (isSuccess) {
     t.classList.add("hit");
+    target.classList.add("hit");
   } else {
     t.classList.add("miss");
+    target.classList.add("miss");
   }
 
   nextTurn(t, enemy);
