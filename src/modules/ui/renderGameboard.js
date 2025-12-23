@@ -1,4 +1,5 @@
 import Ship from "../ship.js";
+import renderMessage from "./renderMessage.js";
 
 export default function renderGameboard(player, enemy) {
   const playerName = player.name;
@@ -62,6 +63,10 @@ export default function renderGameboard(player, enemy) {
 }
 
 function handleAttack(t, enemy) {
+  if (t.classList.contains("hit") || t.classList.contains("miss")) {
+    return renderMessage("Already attacked!");
+  }
+
   const x = t.dataset.x;
   const y = t.dataset.y;
   const isSuccess = enemy.gameboard.receiveAttack(x, y);

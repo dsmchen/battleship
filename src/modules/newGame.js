@@ -1,5 +1,6 @@
 import Player from "./player.js";
 import renderGameboard from "./ui/renderGameboard.js";
+import renderMessage from "./ui/renderMessage.js";
 
 export default function newGame() {
   const playerOne = new Player("One");
@@ -19,4 +20,5 @@ export default function newGame() {
 
   renderGameboard(playerOne, playerTwo);
   renderGameboard(playerTwo, playerOne);
+  renderMessage("Let the game begin!");
 }
