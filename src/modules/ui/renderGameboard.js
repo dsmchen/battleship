@@ -6,16 +6,20 @@ export default function renderGameboard(player, enemy) {
   const playerGrid = player.gameboard.grid;
   const container = document.querySelector(".container");
   const gameboardContainer = document.createElement("div");
-  const shipTitle = document.createElement("h2");
   const shipContainer = document.createElement("div");
-  const attackTitle = document.createElement("h2");
+  const shipTitle = document.createElement("h2");
+  const shipGrid = document.createElement("div");
   const attackContainer = document.createElement("div");
+  const attackTitle = document.createElement("h2");
+  const attackGrid = document.createElement("div");
 
   gameboardContainer.classList.add("gameboard-container");
-  shipTitle.classList.add("ship-title");
   shipContainer.classList.add("ship-container");
-  attackTitle.classList.add("attack-title");
+  shipTitle.classList.add("ship-title");
+  shipGrid.classList.add("ship-grid");
   attackContainer.classList.add("attack-container");
+  attackTitle.classList.add("attack-title");
+  attackGrid.classList.add("attack-grid");
 
   shipTitle.textContent = `${playerName}'s Ships`;
   attackTitle.textContent = `${playerName}'s Attacks`;
@@ -26,11 +30,11 @@ export default function renderGameboard(player, enemy) {
       if (el instanceof Ship) {
         const ship = document.createElement("div");
         ship.classList.add("ship");
-        shipContainer.appendChild(ship);
+        shipGrid.appendChild(ship);
       } else {
         const sea = document.createElement("div");
         sea.classList.add("sea");
-        shipContainer.appendChild(sea);
+        shipGrid.appendChild(sea);
       }
     }
   }
@@ -50,21 +54,18 @@ export default function renderGameboard(player, enemy) {
       sea.dataset.y = k.toString().split("")[1];
     }
 
-    attackContainer.appendChild(sea);
+    attackGrid.appendChild(sea);
   }
 
-  gameboardContainer.append(
-    shipTitle,
-    shipContainer,
-    attackTitle,
-    attackContainer,
-  );
+  shipContainer.append(shipTitle, shipGrid);
+  attackContainer.append(attackTitle, attackGrid);
+  gameboardContainer.append(shipContainer, attackContainer);
   container.appendChild(gameboardContainer);
 }
 
 function handleAttack(t, enemy) {
   if (t.classList.contains("hit") || t.classList.contains("miss")) {
-    return renderMessage("Already attacked!");
+    return renderMessage("action", "Already attacked!");
   }
 
   const x = t.dataset.x;
@@ -76,4 +77,20 @@ function handleAttack(t, enemy) {
   } else {
     t.classList.add("miss");
   }
+
+  nextTurn(t, enemy);
+}
+
+function nextTurn(t, enemy) {
+  const thisAttackGrid = t.parentElement;
+  thisAttackGrid.classList.add("block");
+
+  for (const grid of document.querySelectorAll(".attack-grid")) {
+    if (grid !== thisAttackGrid) {
+      const enemyAttackGrid = grid;
+      enemyAttackGrid.classList.remove("block");
+    }
+  }
+
+  renderMessage("turn", `${enemy.name}'s turn...`);
 }

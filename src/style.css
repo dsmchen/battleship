@@ -118,12 +118,24 @@ body {
   padding: 40px;
 }
 
-.ship-container,
-.attack-container {
+.gameboard-container {
+  display: flex;
+  gap: 40px;
+}
+
+.ship-grid,
+.attack-grid {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   width: 402px;
   border: 1px solid var(--gray-900);
+}
+
+.attack-grid.block::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
 }
 
 .ship,

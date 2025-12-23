@@ -9,14 +9,14 @@ export default class Ship {
 
   hit() {
     this.hits++;
-    renderMessage("Hit!");
+    renderMessage("action", "Hit!");
     this.isSunk();
   }
 
   isSunk() {
     this.hasSunk = this.length === this.hits;
     if (this.hasSunk) {
-      renderMessage("This ship has sunk!");
+      renderMessage("action", "This ship has sunk!");
     }
   }
 }

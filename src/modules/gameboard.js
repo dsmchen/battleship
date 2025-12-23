@@ -34,7 +34,7 @@ export default class Gameboard {
       return true;
     } else {
       this.missedAttacks.push([x, y]);
-      renderMessage("Miss!");
+      renderMessage("action", "Miss!");
       return false;
     }
   }

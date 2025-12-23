@@ -3,8 +3,8 @@ import renderGameboard from "./ui/renderGameboard.js";
 import renderMessage from "./ui/renderMessage.js";
 
 export default function newGame() {
-  const playerOne = new Player("One");
-  const playerTwo = new Player("Two");
+  const playerOne = new Player("Player 1");
+  const playerTwo = new Player("Player 2");
 
   playerOne.gameboard.placeShip(0, 0, 5);
   playerOne.gameboard.placeShip(1, 1, 4);
@@ -20,5 +20,6 @@ export default function newGame() {
 
   renderGameboard(playerOne, playerTwo);
   renderGameboard(playerTwo, playerOne);
-  renderMessage("Let the game begin!");
+  renderMessage("action", "Let the game begin!");
+  renderMessage("turn", `${playerOne.name}'s turn...`);
 }
