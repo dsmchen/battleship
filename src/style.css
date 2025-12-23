@@ -107,20 +107,37 @@ body {
     Helvetica,
     sans-serif;
   color: var(--gray-900);
-  background-color: var(--gray-100);
+  background: var(--gray-100);
+}
+
+header {
+  padding: 20px 40px;
+}
+
+h1 {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+main {
+  padding: 20px 40px 80px;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
-  padding: 40px;
+  gap: 20px;
 }
 
 .gameboard-container {
   display: flex;
   gap: 40px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .ship-grid,
