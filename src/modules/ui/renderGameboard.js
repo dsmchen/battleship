@@ -47,7 +47,7 @@ export default function renderGameboard(player, enemy) {
     const sea = document.createElement("div");
     sea.classList.add("sea");
     sea.addEventListener("click", function () {
-      handleAttack(this, enemy);
+      handleAttack(this, player, enemy);
     });
 
     if (k < 10) {
@@ -67,7 +67,7 @@ export default function renderGameboard(player, enemy) {
   container.appendChild(gameboardContainer);
 }
 
-function handleAttack(t, enemy) {
+function handleAttack(t, player, enemy) {
   if (t.classList.contains("hit") || t.classList.contains("miss")) {
     return renderMessage("action", "Already attacked!");
   }
@@ -91,6 +91,9 @@ function handleAttack(t, enemy) {
   if (isSuccess) {
     t.classList.add("hit");
     target.classList.add("hit");
+    if (enemy.gameboard.isAllSunk()) {
+      return endGame(player);
+    }
   } else {
     t.classList.add("miss");
     target.classList.add("miss");
@@ -129,6 +132,17 @@ function computerTurn(attackGrid) {
   } else {
     setTimeout(() => {
       target.click();
-    }, 3000);
+    }, 2000);
   }
+}
+
+function endGame(player) {
+  const attackGrids = document.querySelectorAll(".attack-grid");
+
+  attackGrids.forEach((grid) => {
+    grid.classList.add("block");
+  });
+
+  renderMessage("action", "Game over!");
+  renderMessage("turn", `${player.name} is the winner!`);
 }

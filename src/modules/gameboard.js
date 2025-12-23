@@ -58,5 +58,7 @@ export default class Gameboard {
     }
 
     if (shipInstance === shipHasSunk) this.hasAllSunk = true;
+
+    return this.hasAllSunk;
   }
 }
