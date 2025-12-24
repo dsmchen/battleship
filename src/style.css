@@ -119,6 +119,11 @@ header {
   padding: 20px 40px;
 }
 
+h1,
+button {
+  line-height: 1;
+}
+
 button {
   padding: 10px;
   font-weight: bold;
