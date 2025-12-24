@@ -1,3 +1,4 @@
+import { randomNumber } from "./lib.js";
 import Ship from "./ship.js";
 import renderMessage from "./ui/renderMessage.js";
 
@@ -19,12 +20,56 @@ export default class Gameboard {
     this.hasAllSunk = false;
   }
 
-  placeShip(x, y, length) {
-    const ship = new Ship(length);
-    this.grid[x][y] = ship;
-    for (let i = 0; i < length; i++) {
-      this.grid[x][y++] = ship;
+  placeShip(
+    length,
+    x = randomNumber(),
+    y = randomNumber(),
+    orientation = this.randomOrientation(),
+  ) {
+    const isValid = this.checkValidity(length, x, y, orientation);
+
+    if (isValid) {
+      const ship = new Ship(length);
+      this.grid[x][y] = ship;
+
+      for (let i = 0; i < length; i++) {
+        if (orientation === "horizontal") {
+          this.grid[x][y++] = ship;
+        } else if (orientation === "vertical") {
+          this.grid[x++][y] = ship;
+        }
+      }
+    } else {
+      this.placeShip(length);
     }
+  }
+
+  randomOrientation() {
+    const number = randomNumber();
+    if (number < 5) {
+      return "horizontal";
+    } else {
+      return "vertical";
+    }
+  }
+
+  checkValidity(length, x, y, orientation) {
+    const maxX = x + length;
+    const maxY = y + length;
+
+    if (maxX > 9 || maxY > 9) return false;
+
+    if (this.grid[x][y] !== 0) return false;
+
+    for (let i = 0; i < length; i++) {
+      if (orientation === "horizontal") {
+        if (this.grid[x][y++] !== 0) return false;
+      } else if (orientation === "vertical") {
+        if (this.grid[x++][y] !== 0) return false;
+      }
+    }
+
+    return true;
   }
 
   receiveAttack(x, y) {

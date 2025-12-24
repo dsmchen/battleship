@@ -1,3 +1,4 @@
+import { randomNumber } from "../lib.js";
 import Ship from "../ship.js";
 import renderMessage from "./renderMessage.js";
 
@@ -123,8 +124,8 @@ function nextTurn(t, enemy) {
 }
 
 function computerTurn(attackGrid) {
-  const x = Math.floor(Math.random() * 10);
-  const y = Math.floor(Math.random() * 10);
+  const x = randomNumber();
+  const y = randomNumber();
   const target = attackGrid.querySelector(`[data-x='${x}'][data-y='${y}']`);
 
   if (target.classList.contains("hit") || target.classList.contains("miss")) {
