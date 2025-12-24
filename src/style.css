@@ -178,3 +178,7 @@ h2 {
 .sea.miss {
   background: var(--white);
 }
+
+.hidden {
+  display: none;
+}

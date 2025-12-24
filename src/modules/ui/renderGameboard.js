@@ -22,6 +22,10 @@ export default function renderGameboard(player, enemy) {
   attackTitle.classList.add("attack-title");
   attackGrid.classList.add("attack-grid");
 
+  if (player.name === "Computer") {
+    gameboardContainer.classList.add("hidden");
+  }
+
   shipTitle.textContent = `${playerName}'s Ships`;
   attackTitle.textContent = `${playerName}'s Attacks`;
 
