@@ -2,6 +2,8 @@
 
 [The Odin Project: Battleship](https://www.theodinproject.com/lessons/node-path-javascript-battleship)
 
+Note: Failed `jsdom` tests are out of scope.
+
 ## Resources
 
 - Font: [Inclusive Sans](https://fonts.google.com/specimen/Inclusive+Sans)
