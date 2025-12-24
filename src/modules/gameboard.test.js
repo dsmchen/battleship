@@ -1,6 +1,8 @@
 import Gameboard from "./gameboard.js";
 import Ship from "./ship.js";
+import renderMessage from "./ui/renderMessage.js";
 jest.mock("./ship.js");
+jest.mock("./ui/renderMessage.js");
 
 beforeEach(() => {
   Ship.mockClear();
@@ -51,7 +53,7 @@ test("checkValidity function returns false for invalid input", () => {
 
 test("receiveAttack function calls Ship class hit function", () => {
   const gameboard = new Gameboard();
-  gameboard.placeShip(0, 0, 3);
+  gameboard.placeShip(3, 0, 0);
   gameboard.receiveAttack(0, 0);
 
   const mockShipInstance = Ship.mock.instances[0];
@@ -64,6 +66,7 @@ test("receiveAttack function records missed attacks", () => {
   gameboard.placeShip(0, 0, 3);
   gameboard.receiveAttack(1, 1);
   expect(gameboard.missedAttacks).toStrictEqual([[1, 1]]);
+  expect(renderMessage).toHaveBeenCalledTimes(1);
 });
 
 test("isAllSunk function toggles hasAllSunk variable to be true", () => {
