@@ -44,8 +44,7 @@ export default class Gameboard {
     }
   }
 
-  randomOrientation() {
-    const number = randomNumber();
+  randomOrientation(number = randomNumber()) {
     if (number < 5) {
       return "horizontal";
     } else {

@@ -13,12 +13,40 @@ test("placeShip function calls Ship class constructor", () => {
   expect(Ship).toHaveBeenCalledTimes(1);
 });
 
-test("placeShip function places ship", () => {
+test("placeShip function places horizontal ship", () => {
   const gameboard = new Gameboard();
-  gameboard.placeShip(0, 0, 3);
+  gameboard.placeShip(3, 0, 0, "horizontal");
   expect(gameboard.grid[0][0]).toBeInstanceOf(Ship);
   expect(gameboard.grid[0][1]).toBeInstanceOf(Ship);
   expect(gameboard.grid[0][2]).toBeInstanceOf(Ship);
+});
+
+test("placeShip function places vertical ship", () => {
+  const gameboard = new Gameboard();
+  gameboard.placeShip(3, 0, 0, "vertical");
+  expect(gameboard.grid[0][0]).toBeInstanceOf(Ship);
+  expect(gameboard.grid[1][0]).toBeInstanceOf(Ship);
+  expect(gameboard.grid[2][0]).toBeInstanceOf(Ship);
+});
+
+test("random orientation is horizontal for number < 5", () => {
+  const gameboard = new Gameboard();
+  expect(gameboard.randomOrientation(0)).toBe("horizontal");
+});
+
+test("random orientation is vertical for number > 5", () => {
+  const gameboard = new Gameboard();
+  expect(gameboard.randomOrientation(9)).toBe("vertical");
+});
+
+test("checkValidity function returns true for valid input", () => {
+  const gameboard = new Gameboard();
+  expect(gameboard.checkValidity(5, 0, 0, "horizontal")).toBe(true);
+});
+
+test("checkValidity function returns false for invalid input", () => {
+  const gameboard = new Gameboard();
+  expect(gameboard.checkValidity(5, 9, 9, "vertical")).toBe(false);
 });
 
 test("receiveAttack function calls Ship class hit function", () => {
