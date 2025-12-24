@@ -111,12 +111,18 @@ body {
 }
 
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
   padding: 20px 40px;
 }
 
-h1 {
-  max-width: 1200px;
-  margin: 0 auto;
+button {
+  padding: 10px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 main {
