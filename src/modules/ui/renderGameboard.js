@@ -1,4 +1,5 @@
 import { randomNumber } from "../lib.js";
+import newGame from "../newGame.js";
 import Ship from "../ship.js";
 import renderMessage from "./renderMessage.js";
 
@@ -70,6 +71,7 @@ export default function renderGameboard(player, enemy) {
   attackContainer.append(attackTitle, attackGrid);
   gameboardContainer.append(shipContainer, attackContainer);
   container.appendChild(gameboardContainer);
+  initRandomButton();
 }
 
 function handleAttack(t, player, enemy) {
@@ -105,6 +107,7 @@ function handleAttack(t, player, enemy) {
   }
 
   nextTurn(t, enemy);
+  changeRandomButtonText("Random Ships", "Restart Game");
 }
 
 function nextTurn(t, enemy) {
@@ -150,4 +153,21 @@ function endGame(player) {
 
   renderMessage("action", "Game over!");
   renderMessage("turn", `${player.name} is the winner!`);
+}
+
+function initRandomButton() {
+  const button = document.querySelector("button");
+  button.addEventListener("click", handleRandomButtonClick);
+}
+
+function handleRandomButtonClick() {
+  changeRandomButtonText("Restart Game", "Random Ships");
+  newGame();
+}
+
+function changeRandomButtonText(find, replace) {
+  const button = document.querySelector("button");
+  if (button.textContent === find) {
+    button.textContent = replace;
+  }
 }

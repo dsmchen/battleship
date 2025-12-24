@@ -18,6 +18,13 @@ export default function newGame() {
   playerTwo.gameboard.placeShip(4);
   playerTwo.gameboard.placeShip(5);
 
+  const gameboardContainers = document.querySelectorAll(".gameboard-container");
+  if (gameboardContainers.length) {
+    gameboardContainers.forEach((container) => {
+      container.remove();
+    });
+  }
+
   renderGameboard(playerOne, playerTwo);
   renderGameboard(playerTwo, playerOne);
   renderMessage("action", "Let the game begin!");
