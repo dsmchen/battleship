@@ -8,10 +8,10 @@ beforeEach(() => {
   Ship.mockClear();
 });
 
-test("placeShip function calls Ship class constructor", () => {
+test("placeShip function calls Ship class", () => {
   expect(Ship).not.toHaveBeenCalled();
   const gameboard = new Gameboard();
-  gameboard.placeShip(0, 0, 3);
+  gameboard.placeShip(3);
   expect(Ship).toHaveBeenCalledTimes(1);
 });
 
@@ -63,7 +63,7 @@ test("receiveAttack function calls Ship class hit function", () => {
 
 test("receiveAttack function records missed attacks", () => {
   const gameboard = new Gameboard();
-  gameboard.placeShip(0, 0, 3);
+  gameboard.placeShip(3, 0, 0);
   gameboard.receiveAttack(1, 1);
   expect(gameboard.missedAttacks).toStrictEqual([[1, 1]]);
   expect(renderMessage).toHaveBeenCalledTimes(1);
@@ -71,8 +71,8 @@ test("receiveAttack function records missed attacks", () => {
 
 test("isAllSunk function toggles hasAllSunk variable to be true", () => {
   const gameboard = new Gameboard();
-  gameboard.placeShip(0, 0, 3);
-  gameboard.placeShip(1, 1, 2);
+  gameboard.placeShip(3, 0, 0, "horizontal");
+  gameboard.placeShip(2, 1, 1, "horizontal");
   gameboard.receiveAttack(0, 0);
   gameboard.receiveAttack(0, 1);
   gameboard.receiveAttack(0, 2);
@@ -90,8 +90,8 @@ test("isAllSunk function toggles hasAllSunk variable to be true", () => {
 
 test("isAllSunk function toggles hasAllSunk variable to be false", () => {
   const gameboard = new Gameboard();
-  gameboard.placeShip(0, 0, 3);
-  gameboard.placeShip(1, 1, 2);
+  gameboard.placeShip(3, 0, 0, "horizontal");
+  gameboard.placeShip(2, 1, 1, "horizontal");
   gameboard.receiveAttack(0, 0);
   gameboard.receiveAttack(0, 1);
   gameboard.receiveAttack(0, 2);
