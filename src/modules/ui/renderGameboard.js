@@ -1,7 +1,7 @@
 import { randomNumber } from "../lib.js";
 import newGame from "../newGame.js";
 import Ship from "../ship.js";
-import renderMessage from "./renderMessage.js";
+import { renderActionMessage, renderTurnMessage } from "./renderMessage.js";
 
 export default function renderGameboard(player, enemy) {
   const playerName = player.name;
@@ -76,7 +76,7 @@ export default function renderGameboard(player, enemy) {
 
 function handleAttack(t, player, enemy) {
   if (t.classList.contains("hit") || t.classList.contains("miss")) {
-    return renderMessage("action", "Already attacked!");
+    return renderActionMessage("Already attacked!");
   }
 
   const x = t.dataset.x;
@@ -123,7 +123,7 @@ function nextTurn(t, enemy) {
     }
   }
 
-  renderMessage("turn", `${enemy.name}'s turn...`);
+  renderTurnMessage(`${enemy.name}'s turn...`);
 
   if (enemy.name === "Computer") {
     computerTurn(enemyAttackGrid);
@@ -151,8 +151,8 @@ function endGame(player) {
     grid.classList.add("block");
   });
 
-  renderMessage("action", "Game over!");
-  renderMessage("turn", `${player.name} is the winner!`);
+  renderActionMessage("Game over!");
+  renderTurnMessage(`${player.name} is the winner!`);
 }
 
 function initRandomButton() {

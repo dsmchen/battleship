@@ -1,6 +1,6 @@
 import { randomNumber } from "./lib.js";
 import Ship from "./ship.js";
-import renderMessage from "./ui/renderMessage.js";
+import { renderActionMessage } from "./ui/renderMessage.js";
 
 export default class Gameboard {
   constructor() {
@@ -78,7 +78,7 @@ export default class Gameboard {
       return true;
     } else {
       this.missedAttacks.push([x, y]);
-      renderMessage("action", "Miss!");
+      renderActionMessage("Miss!");
       return false;
     }
   }

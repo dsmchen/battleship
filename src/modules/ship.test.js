@@ -1,5 +1,5 @@
 import Ship from "./ship.js";
-import renderMessage from "./ui/renderMessage.js";
+import { renderActionMessage } from "./ui/renderMessage.js";
 jest.mock("./ui/renderMessage.js");
 
 describe("hit function", () => {
@@ -7,7 +7,7 @@ describe("hit function", () => {
     const ship = new Ship();
     ship.hit();
     expect(ship.hits).toBe(1);
-    expect(renderMessage).toHaveBeenCalledTimes(1);
+    expect(renderActionMessage).toHaveBeenCalledTimes(1);
   });
 });
 

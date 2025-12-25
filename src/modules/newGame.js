@@ -1,6 +1,6 @@
 import Player from "./player.js";
 import renderGameboard from "./ui/renderGameboard.js";
-import renderMessage from "./ui/renderMessage.js";
+import { renderActionMessage, renderTurnMessage } from "./ui/renderMessage.js";
 
 export default function newGame() {
   const playerOne = new Player("Human");
@@ -27,6 +27,6 @@ export default function newGame() {
 
   renderGameboard(playerOne, playerTwo);
   renderGameboard(playerTwo, playerOne);
-  renderMessage("action", "Let the game begin!");
-  renderMessage("turn", `${playerOne.name}'s turn...`);
+  renderActionMessage("Let the game begin!");
+  renderTurnMessage(`${playerOne.name}'s turn...`);
 }

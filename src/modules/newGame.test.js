@@ -6,7 +6,7 @@ import Gameboard from "./gameboard.js";
 import newGame from "./newGame.js";
 import Player from "./player.js";
 import renderGameboard from "./ui/renderGameboard.js";
-import renderMessage from "./ui/renderMessage.js";
+import { renderActionMessage, renderTurnMessage } from "./ui/renderMessage.js";
 
 jest.mock("./gameboard.js");
 const mockGameboard = new Gameboard();
@@ -39,6 +39,7 @@ describe("newGame function", () => {
   test("newGame function calls renderGameboard and renderMessage functions", () => {
     newGame();
     expect(renderGameboard).toHaveBeenCalled();
-    expect(renderMessage).toHaveBeenCalled();
+    expect(renderActionMessage).toHaveBeenCalled();
+    expect(renderTurnMessage).toHaveBeenCalled();
   });
 });
