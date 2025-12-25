@@ -1,6 +1,4 @@
 import Player from "./player.js";
-import renderGameboard from "./ui/renderGameboard.js";
-import { renderActionMessage, renderTurnMessage } from "./ui/renderMessage.js";
 
 export default function newGame() {
   const playerOne = new Player("Human");
@@ -18,15 +16,5 @@ export default function newGame() {
   playerTwo.gameboard.placeShip(4);
   playerTwo.gameboard.placeShip(5);
 
-  const gameboardContainers = document.querySelectorAll(".gameboard-container");
-  if (gameboardContainers.length) {
-    gameboardContainers.forEach((container) => {
-      container.remove();
-    });
-  }
-
-  renderGameboard(playerOne, playerTwo);
-  renderGameboard(playerTwo, playerOne);
-  renderActionMessage("Let the game begin!");
-  renderTurnMessage(`${playerOne.name}'s turn...`);
+  return [playerOne, playerTwo];
 }

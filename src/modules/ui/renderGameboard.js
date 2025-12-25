@@ -1,5 +1,5 @@
+import initGame from "../../index.js";
 import { randomNumber } from "../lib.js";
-import newGame from "../newGame.js";
 import Ship from "../ship.js";
 import { renderActionMessage, renderTurnMessage } from "./renderMessage.js";
 
@@ -71,7 +71,7 @@ export default function renderGameboard(player, enemy) {
   attackContainer.append(attackTitle, attackGrid);
   gameboardContainer.append(shipContainer, attackContainer);
   container.appendChild(gameboardContainer);
-  initRandomButton();
+  initButton();
 }
 
 function handleAttack(t, player, enemy) {
@@ -113,7 +113,7 @@ function handleAttack(t, player, enemy) {
   }
 
   nextTurn(t, enemy);
-  changeRandomButtonText("Random Ships", "Restart Game");
+  changeButtonText("Random Ships", "Restart Game");
 }
 
 function nextTurn(t, enemy) {
@@ -161,19 +161,29 @@ function endGame(player) {
   renderTurnMessage(`${player.name} is the winner!`);
 }
 
-function initRandomButton() {
+function initButton() {
   const button = document.querySelector("button");
-  button.addEventListener("click", handleRandomButtonClick);
+  button.addEventListener("click", handleButtonClick);
 }
 
-function handleRandomButtonClick() {
-  changeRandomButtonText("Restart Game", "Random Ships");
-  newGame();
+function handleButtonClick() {
+  changeButtonText("Restart Game", "Random Ships");
+  removeGameboardContainers();
+  initGame();
 }
 
-function changeRandomButtonText(find, replace) {
+function changeButtonText(find, replace) {
   const button = document.querySelector("button");
   if (button.textContent === find) {
     button.textContent = replace;
+  }
+}
+
+function removeGameboardContainers() {
+  const gameboardContainers = document.querySelectorAll(".gameboard-container");
+  if (gameboardContainers.length) {
+    gameboardContainers.forEach((container) => {
+      container.remove();
+    });
   }
 }
