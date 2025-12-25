@@ -1,6 +1,5 @@
 import { randomNumber } from "./lib.js";
 import Ship from "./ship.js";
-import { renderActionMessage } from "./ui/renderMessage.js";
 
 export default class Gameboard {
   constructor() {
@@ -74,12 +73,11 @@ export default class Gameboard {
   receiveAttack(x, y) {
     if (this.grid[x][y] !== 0) {
       const ship = this.grid[x][y];
-      ship.hit();
-      return true;
+      const result = ship.hit();
+      return result;
     } else {
       this.missedAttacks.push([x, y]);
-      renderActionMessage("Miss!");
-      return false;
+      return "miss";
     }
   }
 

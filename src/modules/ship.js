@@ -1,5 +1,3 @@
-import { renderActionMessage } from "./ui/renderMessage.js";
-
 export default class Ship {
   constructor(length) {
     this.length = length;
@@ -9,14 +7,11 @@ export default class Ship {
 
   hit() {
     this.hits++;
-    renderActionMessage("Hit!");
     this.isSunk();
+    return this.hasSunk ? "sunk" : "hit";
   }
 
   isSunk() {
     this.hasSunk = this.length === this.hits;
-    if (this.hasSunk) {
-      renderActionMessage("This ship has sunk!");
-    }
   }
 }

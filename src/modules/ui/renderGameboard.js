@@ -82,7 +82,7 @@ function handleAttack(t, player, enemy) {
   const x = t.dataset.x;
   const y = t.dataset.y;
   let target;
-  const isSuccess = enemy.gameboard.receiveAttack(x, y);
+  const result = enemy.gameboard.receiveAttack(x, y);
 
   for (const container of document.querySelectorAll(".ship-container")) {
     const thisShipContainer = t.parentElement.parentElement.previousSibling;
@@ -95,15 +95,21 @@ function handleAttack(t, player, enemy) {
     }
   }
 
-  if (isSuccess) {
+  if (result === "hit" || result === "sunk") {
     t.classList.add("hit");
     target.classList.add("hit");
+
+    const text = result === "hit" ? "Hit!" : "This ship has sunk!";
+    renderActionMessage(text);
+
     if (enemy.gameboard.isAllSunk()) {
       return endGame(player);
     }
-  } else {
+  } else if (result === "miss") {
     t.classList.add("miss");
     target.classList.add("miss");
+
+    renderActionMessage("Miss!");
   }
 
   nextTurn(t, enemy);
