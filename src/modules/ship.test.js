@@ -9,11 +9,18 @@ test("hit function adds 1 to hits variable", () => {
   expect(renderMessage).toHaveBeenCalledTimes(1);
 });
 
-test("isSunk function calculates hasSunk variable", () => {
+test("isSunk function calculates hasSunk variable to be true", () => {
   const ship = new Ship(3);
   ship.hit();
   ship.hit();
   ship.hit();
   ship.isSunk();
   expect(ship.hasSunk).toBe(true);
+});
+
+test("isSunk function calculates hasSunk variable to be false", () => {
+  const ship = new Ship(3);
+  ship.hit();
+  ship.isSunk();
+  expect(ship.hasSunk).toBe(false);
 });
