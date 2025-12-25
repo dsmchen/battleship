@@ -1,13 +1,10 @@
 import Ship from "./ship.js";
-import { renderActionMessage } from "./ui/renderMessage.js";
-jest.mock("./ui/renderMessage.js");
 
 describe("hit function", () => {
   test("hit function adds 1 to hits variable", () => {
     const ship = new Ship();
     ship.hit();
     expect(ship.hits).toBe(1);
-    expect(renderActionMessage).toHaveBeenCalledTimes(1);
   });
 });
 

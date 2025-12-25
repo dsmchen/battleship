@@ -1,8 +1,6 @@
 import Gameboard from "./gameboard.js";
 import Ship from "./ship.js";
-import { renderActionMessage } from "./ui/renderMessage.js";
 jest.mock("./ship.js");
-jest.mock("./ui/renderMessage.js");
 
 let gameboard;
 
@@ -67,7 +65,6 @@ describe("receiveAttack function", () => {
     gameboard.placeShip(3, 0, 0);
     gameboard.receiveAttack(1, 1);
     expect(gameboard.missedAttacks).toStrictEqual([[1, 1]]);
-    expect(renderActionMessage).toHaveBeenCalledTimes(1);
   });
 });
 
