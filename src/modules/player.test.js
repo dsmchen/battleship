@@ -6,8 +6,10 @@ beforeEach(() => {
   Gameboard.mockClear();
 });
 
-test("Player class calls Gameboard class constructor", () => {
-  expect(Gameboard).not.toHaveBeenCalled();
-  const player = new Player();
-  expect(Gameboard).toHaveBeenCalledTimes(1);
+describe("Player class", () => {
+  test("Player class calls Gameboard class constructor", () => {
+    expect(Gameboard).not.toHaveBeenCalled();
+    const player = new Player();
+    expect(Gameboard).toHaveBeenCalledTimes(1);
+  });
 });

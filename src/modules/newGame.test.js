@@ -23,20 +23,22 @@ beforeEach(() => {
   Player.mockClear();
 });
 
-test("newGame function calls Player class", () => {
-  expect(Player).not.toHaveBeenCalled();
-  newGame();
-  expect(Player).toHaveBeenCalledTimes(2);
-});
+describe("newGame function", () => {
+  test("newGame function calls Player class constructor", () => {
+    expect(Player).not.toHaveBeenCalled();
+    newGame();
+    expect(Player).toHaveBeenCalledTimes(2);
+  });
 
-test("newGame function calls placeShip function", () => {
-  newGame();
-  const player = new Player();
-  expect(player.gameboard.placeShip).toHaveBeenCalled();
-});
+  test("newGame function calls placeShip function", () => {
+    newGame();
+    const player = new Player();
+    expect(player.gameboard.placeShip).toHaveBeenCalled();
+  });
 
-test("newGame function calls renderGameboard and renderMessage functions", () => {
-  newGame();
-  expect(renderGameboard).toHaveBeenCalled();
-  expect(renderMessage).toHaveBeenCalled();
+  test("newGame function calls renderGameboard and renderMessage functions", () => {
+    newGame();
+    expect(renderGameboard).toHaveBeenCalled();
+    expect(renderMessage).toHaveBeenCalled();
+  });
 });
